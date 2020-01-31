@@ -1,0 +1,205 @@
+1. Calculate the minimum attendance from BigQuery public data baseball game.
+SELECT MIN(attendance)
+ FROM `bigquery-public-data.baseball.games_post_wide`
+
+37727	
+
+2.Calculate average from from BigQuery public data baseball game.
+
+SELECT AVG(durationMinutes)
+  FROM `bigquery-public-data.baseball.games_post_wide`
+  
+211.48697556477677	
+
+3.Which two teams were part of the longest basket ball game of the year 2016? Mention the duration of the game as well.
+select year, homeTeamName,awayTeamName,duration_minutes,
+from `bigquery-public-data.baseball.schedules`
+order by `duration_minutes` desc
+limit 1
+
+2016	Blue Jays	Indians	373	
+
+4. Count duration from BigQuery public data baseball game.
+SELECT COUNT(duration)
+FROM `bigquery-public-data.baseball.games_post_wide`
+
+8676	
+
+5. Using join command join two data sets from bigquery-public-data.ethereum_blockchain.contracts and bigquery-public-data.ethereum_blockchain.transactions
+SELECT contracts.address, COUNT(1) AS tx_count
+FROM `bigquery-public-data.ethereum_blockchain.contracts` AS contracts
+JOIN `bigquery-public-data.ethereum_blockchain.transactions` AS transactions ON (transactions.to_address = contracts.address)
+WHERE contracts.is_erc721 = TRUE
+GROUP BY contracts.address
+ORDER BY tx_count desc
+LIMIT 3
+
+0x06012c8cf97bead5deae237070f9587f8e7a266d	4391135	
+
+
+6.Provide fertility rates.
+
+select fertility1.country_name,fertility2.crude_birth_rate
+from `bigquery-public-data.census_bureau_international.age_specific_fertility_rates`
+as fertility1
+join `bigquery-public-data.census_bureau_international.birth_death_growth_rates` as fertility2
+ON (fertility1.country_name=fertility2.country_name)
+
+1	Aruba	18.47	
+2	Aruba	18.89	
+3	Aruba	19.25	
+4	Aruba	19.54	
+5	Aruba	19.7	
+6	Aruba	19.75	
+7	Aruba	19.74	
+8	Aruba	19.66	
+9	Aruba	19.54	
+10	Aruba	19.39	
+11	Aruba	19.29	
+12	Aruba	18.6	
+13	Aruba	18.05	
+14	Aruba	16.89	
+15	Aruba	17.75	
+16	Aruba	17.48	
+17	Aruba	16.9	
+18	Aruba	14.91	
+19	Aruba	14.04	
+20	Aruba	13.31	
+21	Aruba	13.16	
+22	Aruba	13.03	
+23	Aruba	12.95	
+24	Aruba	12.91	
+25	Aruba	12.87	
+26	Aruba	12.84	
+27	Aruba	12.83	
+28	Aruba	12.81	
+29	Aruba	12.79	
+30	Aruba	12.77	
+31	Aruba	12.78	
+32	Aruba	12.76	
+33	Aruba	12.72	
+34	Aruba	12.65	
+35	Aruba	12.56	
+36	Aruba	12.49	
+37	Aruba	12.41	
+38	Aruba	12.33	
+39	Aruba	12.21	
+40	Aruba	12.08	
+41	Aruba	11.96	
+42	Aruba	11.83	
+43	Aruba	11.71	
+44	Aruba	11.58	
+45	Aruba	11.46	
+46	Aruba	11.33	
+47	Aruba	11.2	
+48	Aruba	11.1	
+49	Aruba	11.02	
+50	Aruba	10.94	
+51	Aruba	10.87	
+52	Aruba	10.8	
+53	Aruba	10.74	
+54	Aruba	10.71	
+55	Aruba	10.69	
+56	Aruba	10.65	
+57	Aruba	10.63	
+58	Aruba	10.6	
+59	Aruba	10.6	
+60	Aruba	10.58	
+61	Aruba	10.57	
+62	Aruba	10.56	
+63	Aruba	10.54	
+64	Aruba	10.53	
+65	Aruba	10.51	
+66	Aruba	10.48	
+67	Aruba	10.46	
+68	Aruba	10.43	
+69	Aruba	10.39	
+70	Aruba	10.36	
+71	Aruba	18.47	
+72	Aruba	18.89	
+73	Aruba	19.25	
+74	Aruba	19.54	
+75	Aruba	19.7	
+76	Aruba	19.75	
+77	Aruba	19.74	
+78	Aruba	19.66	
+79	Aruba	19.54	
+80	Aruba	19.39	
+81	Aruba	19.29	
+82	Aruba	18.6	
+83	Aruba	18.05	
+84	Aruba	16.89	
+85	Aruba	17.75	
+86	Aruba	17.48	
+87	Aruba	16.9	
+88	Aruba	14.91	
+89	Aruba	14.04	
+90	Aruba	13.31	
+91	Aruba	13.16	
+92	Aruba	13.03	
+93	Aruba	12.95	
+94	Aruba	12.91	
+95	Aruba	12.87	
+96	Aruba	12.84	
+97	Aruba	12.83	
+98	Aruba	12.81	
+99	Aruba	12.79	
+100	Aruba	12.77	
+
+7. Using join command show how to join two sets of data from bigquery-public-data.ethereum_blockchain.contracts and bigquery-public-data.ethereum_blockchain.transactions.
+SELECT contracts.address, COUNT(1) AS tx_count
+FROM `bigquery-public-data.ethereum_blockchain.contracts` AS contracts
+JOIN `bigquery-public-data.ethereum_blockchain.transactions` AS transactions ON (transactions.to_address = contracts.address)
+WHERE contracts.is_erc721 = TRUE
+GROUP BY contracts.address
+ORDER BY tx_count DESC
+LIMIT 5
+
+0x06012c8cf97bead5deae237070f9587f8e7a266d	4391135	
+
+
+8. Useing command LOWER show how to find address from bigquery-public-data.austin_crime.crime.
+select LOWER(address) AS address
+from `bigquery-public-data.austin_crime.crime`
+order by year desc
+limit 20
+
+Row	address	
+1	austin, tx	
+2	austin, tx	
+3	austin, tx	
+4	austin, tx	
+5	austin, tx	
+6	austin, tx	
+7	austin, tx	
+8	austin, tx	
+9	austin, tx	
+10	austin, tx	
+11	austin, tx	
+12	austin, tx	
+13	austin, tx	
+14	austin, tx	
+15	austin, tx	
+16	austin, tx	
+17	austin, tx	
+18	austin, tx	
+19	austin, tx	
+20	austin, tx	
+
+9. Find the most populated area in the United States of America. and mention its geo id in order to enhance  the tracking speed.
+SELECT census1.zipcode,census1.population,census1.geo_id
+FROM `bigquery-public-data.census_bureau_usa.population_by_zip_2000` AS census1
+JOIN `bigquery-public-data.census_bureau_usa.population_by_zip_2000` AS census2
+ON (census1.zipcode = census2.zipcode)
+order by `population` desc
+LIMIT 1
+
+zipcode population geo_id
+00725 143987 8600000US00725
+
+10. Calculate sum from bigquery-public-data.baseball.games_post_wide.
+SELECT Sum(durationMinutes)
+FROM `bigquery-public-data.baseball.games_post_wide` 
+
+Row	f0_	
+1	1834861	
